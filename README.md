@@ -106,19 +106,20 @@ Relationships:
 
 ## API Documentation
 
-### Base URL
+### Endpoints Overview
 
-```
-http://localhost:3000
-```
+The API provides two main endpoints:
 
-### Endpoints
+1. **Health Check** - `GET /` - Verify server is running
+2. **Search Dishes** - `GET /search/dishes` - Search restaurants by dish name and price range
+
+### Endpoint Details
 
 #### 1. Health Check
 
 **GET** `/`
 
-Returns a simple test message.
+Returns a simple test message to verify the server is running.
 
 **Response:**
 ```
@@ -144,12 +145,52 @@ Search for restaurants that serve a specific dish within a price range, ranked b
 - `minPrice` and `maxPrice` must be valid numbers
 - `minPrice` must be less than or equal to `maxPrice`
 
-**Example Request:**
-```bash
-GET /search/dishes?name=biryani&minPrice=150&maxPrice=300
+**Success Response (200 OK):**
+- `restaurantId`: Unique restaurant identifier
+- `restaurantName`: Name of the restaurant
+- `city`: City where the restaurant is located
+- `dishName`: Name of the dish matching the search
+- `dishPrice`: Price of the dish
+- `orderCount`: Number of orders for this dish (used for ranking)
+
+---
+
+## Development API
+
+### Base URL
+
+```
+http://localhost:3000
 ```
 
-**Success Response (200 OK):**
+### Examples
+
+#### Health Check
+
+```bash
+# Using curl
+curl http://localhost:3000/
+
+# Using browser
+http://localhost:3000/
+```
+
+**Response:**
+```
+Testing the server!!
+```
+
+#### Search Dishes
+
+```bash
+# Using curl
+curl "http://localhost:3000/search/dishes?name=biryani&minPrice=150&maxPrice=300"
+
+# Using browser
+http://localhost:3000/search/dishes?name=biryani&minPrice=150&maxPrice=300
+```
+
+**Example Response:**
 ```json
 {
   "restaurants": [
@@ -173,13 +214,62 @@ GET /search/dishes?name=biryani&minPrice=150&maxPrice=300
 }
 ```
 
-**Response Fields:**
-- `restaurantId`: Unique restaurant identifier
-- `restaurantName`: Name of the restaurant
-- `city`: City where the restaurant is located
-- `dishName`: Name of the dish matching the search
-- `dishPrice`: Price of the dish
-- `orderCount`: Number of orders for this dish (used for ranking)
+---
+
+## Production API
+
+### Base URL
+
+```
+https://restaurant-search-production.up.railway.app
+```
+
+### Examples
+
+#### Health Check
+
+```bash
+curl --location 'https://restaurant-search-production.up.railway.app/'
+```
+
+**Response:**
+```
+Testing the server!!
+```
+
+#### Search Dishes
+
+```bash
+# Using curl
+curl --location 'https://restaurant-search-production.up.railway.app/search/dishes?name=biryani&minPrice=100&maxPrice=600'
+
+# Using browser or HTTP client
+https://restaurant-search-production.up.railway.app/search/dishes?name=biryani&minPrice=100&maxPrice=600
+```
+
+**Example Response:**
+```json
+{
+  "restaurants": [
+    {
+      "restaurantId": 1,
+      "restaurantName": "Hyderabadi Spice House",
+      "city": "Hyderabad",
+      "dishName": "Chicken Biryani",
+      "dishPrice": 220,
+      "orderCount": 20
+    },
+    {
+      "restaurantId": 2,
+      "restaurantName": "Biryani Palace",
+      "city": "Bengaluru",
+      "dishName": "Chicken Biryani",
+      "dishPrice": 200,
+      "orderCount": 8
+    }
+  ]
+}
+```
 
 **Error Responses:**
 
@@ -256,6 +346,14 @@ MYSQLDATABASE=restaurant_search # Database name
 - **Render**: Use managed MySQL database service and connect via provided connection string variables
 - **Railway**: MySQL service automatically provides `MYSQL*` environment variables
 - **Heroku**: Use Heroku Postgres or JawsDB MySQL addon
+
+### Production Deployment
+
+The application is currently deployed on **Railway** and is accessible at:
+
+**Production URL:** `https://restaurant-search-production.up.railway.app`
+
+See the [Production API](#production-api) section above for detailed examples and usage.
 
 ## Development
 
