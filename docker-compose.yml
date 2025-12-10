@@ -7,11 +7,11 @@ services:
       - "3000:3000"
     environment:
       - PORT=3000
-      - DB_HOST=localhost
-      - DB_PORT=3306
-      - DB_USER=root
-      - DB_PASSWORD=rootpassword
-      - DB_NAME=restaurant_search
+      - MYSQLHOST=localhost
+      - MYSQLPORT=3306
+      - MYSQLUSER=root
+      - MYSQLPASSWORD=rootpassword
+      - MYSQLDATABASE=restaurant_search
     volumes:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped

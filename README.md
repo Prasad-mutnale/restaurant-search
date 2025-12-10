@@ -21,11 +21,11 @@ Node + MySQL backend (MVC-style: routes → controllers → services) to search 
 3. Configure environment variables (`.env` at project root):
    ```
    PORT=3000
-   DB_HOST=localhost
-   DB_PORT=3306
-   DB_USER=root
-   DB_PASSWORD=yourpassword
-   DB_NAME=restaurant_search
+   MYSQLHOST=localhost
+   MYSQLPORT=3306
+   MYSQLUSER=root
+   MYSQLPASSWORD=yourpassword
+   MYSQLDATABASE=restaurant_search
    ```
 4. Run the server:
    - `node src/server.js`

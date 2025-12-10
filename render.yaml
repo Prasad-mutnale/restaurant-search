@@ -7,14 +7,14 @@ services:
     envVars:
       - key: PORT
         value: 3000
-      - key: DB_HOST
+      - key: MYSQLHOST
         value: localhost
-      - key: DB_PORT
+      - key: MYSQLPORT
         value: 3306
-      - key: DB_USER
+      - key: MYSQLUSER
         value: root
-      - key: DB_PASSWORD
+      - key: MYSQLPASSWORD
         generateValue: true
-      - key: DB_NAME
+      - key: MYSQLDATABASE
         value: restaurant_search
 
