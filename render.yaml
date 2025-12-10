@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: restaurant-search
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: DB_HOST
+        value: localhost
+      - key: DB_PORT
+        value: 3306
+      - key: DB_USER
+        value: root
+      - key: DB_PASSWORD
+        generateValue: true
+      - key: DB_NAME
+        value: restaurant_search
+
