@@ -5,7 +5,7 @@ export async function getDishSearch(req, res, next) {
     const { name, minPrice, maxPrice } = req.query;
 
     if (!name || !name.trim()) {
-      res.status(400).json({ message: "Query param 'name' is required" });
+      res.status(400).json({ message: "Name is required" });
       return;
     }
 
@@ -13,12 +13,12 @@ export async function getDishSearch(req, res, next) {
     const max = Number(maxPrice);
 
     if (Number.isNaN(min) || Number.isNaN(max)) {
-      res.status(400).json({ message: "Query params 'minPrice' and 'maxPrice' must be numbers" });
+      res.status(400).json({ message: "MinPrice and MaxPrice must be numbers" });
       return;
     }
 
     if (min > max) {
-      res.status(400).json({ message: "'minPrice' must be less than or equal to 'maxPrice'" });
+      res.status(400).json({ message: "MinPrice must be less than or equal to MaxPrice" });
       return;
     }
 
@@ -30,7 +30,7 @@ export async function getDishSearch(req, res, next) {
     });
 
     if (!restaurants || restaurants.length === 0) {
-      res.status(404).json({ message: "No restaurants found for given dish and price range", restaurants: [] });
+      res.status(404).json({ message: "No restaurants found", restaurants: [] });
       return;
     }
 
